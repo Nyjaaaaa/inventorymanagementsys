@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index(){
 
-        $users = User::whereNotIn('name', ['admin'])->paginate(10);
+        $users = User::latest()->whereNotIn('name', ['admin'])->paginate(10);
 
         return view('admin.users.index', compact('users'));
     }
