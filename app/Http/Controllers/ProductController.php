@@ -35,7 +35,25 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'image|mimes:jfif,jpg,png,jpeg,gif,svg|max:2048',
         ]);
+
+        $has_file = $request->hasFile('image');
+
+        if($has_file){
+            $image_path = $request->file('image')->store('images', 'public');
+
+            $request->user()->product()->create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'category_id' => $request->category_id,
+                'image' => $image_path,
+            ]);
+
+            return redirect()->route('products.index')->with('message', 'Product added succesfully.');
+        }
 
         $request->user()->product()->create([
             'name' => $request->name,
@@ -46,7 +64,6 @@ class ProductController extends Controller
         ]);
 
         return redirect()->route('products.index')->with('message', 'Product added succesfully.');
-        
     }
 
     public function edit(Product $product){
@@ -58,17 +75,50 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product){
 
-        $validated = $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'image|mimes:jfif,jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
-        $product->update($validated);
+        $has_file = $request->hasFile('image');
+
+        if($has_file){
+            $image_path = $request->file('image')->store('images', 'public');
+
+            $product->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'category_id' => $request->category_id,
+                'image' => $image_path,
+            ]);
+
+            return redirect()->route('products.index')->with('message', 'Product updated succesfully.');
+        }
+
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'category_id' => $request->category_id,
+            'image' => $product->image,
+        ]);
 
         return redirect()->route('products.index')->with('message', 'Product updated succesfully.');
+
+    }
+
+    public function show(Product $product){
+
+        $categories = Category::all();
+
+        return view('products.show', compact('product', 'categories'));
     }
 
     public function destroy(Product $product){

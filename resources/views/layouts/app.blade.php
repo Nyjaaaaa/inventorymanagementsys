@@ -266,7 +266,7 @@
                 <button @click="isOpen = !isOpen" class="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
                   <img
                     class="object-cover w-8 h-8 rounded-full"
-                    src="{{ asset('/images/profile.png') }}"
+                    src="{{ asset('/images/profile_avatar/profile.png') }}"
                     alt="Profile"
                   />
                 </button>

@@ -104,13 +104,13 @@
                                     scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                                     >
-                                    Name
+                                    Image
                                     </th>
                                     <th
                                     scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                                     >
-                                    Description
+                                    Name
                                     </th>
                                     <th
                                     scope="col"
@@ -143,12 +143,17 @@
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                {{ $product->name }}
+                                                <div class="flex-shrink-0 w-10 h-10">
+                                                    <img
+                                                    class="w-10 h-10 rounded-full"
+                                                    src="{{ asset('storage/'. $product->image) }}"
+                                                    />
+                                                </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                {{ $product->description }}
+                                                {{ $product->name }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -169,6 +174,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex space-x-2">
                                                 <a href="{{ route('products.edit', $product->id) }}" class="text-purple-500 underline">Edit</a>
+                                                <a href="{{ route('products.show', $product->id) }}" class="text-green-500 underline">Details</a>
                                                 <form method="POST" action="{{ route('products.destroy', $product->id) }}" onsubmit="return confirm('Are you sure?');">
                                                     @csrf
                                                     @method('DELETE')
