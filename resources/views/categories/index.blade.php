@@ -29,9 +29,9 @@
             lg:items-center lg:space-y-0 lg:flex-row
             "
         >
-            <h1 class="text-2xl font-semibold whitespace-nowrap">Users</h1>
+            <h1 class="text-2xl font-semibold whitespace-nowrap">Product categories</h1>
             <a
-                href="{{ route('admin.users.create') }}"
+                href="{{ route('categories.create') }}"
                 class="
                 inline-flex
                 items-center
@@ -71,7 +71,7 @@
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
                     />
                 </svg>
-                <span>Add User</span>
+                <span>Add Category</span>
             </a>
         </div>
 
@@ -89,13 +89,7 @@
                                     scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                                     >
-                                    Name
-                                    </th>
-                                    <th
-                                    scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                                    >
-                                    Email
+                                    Category name
                                     </th>
                                     <th
                                     scope="col"
@@ -106,21 +100,17 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($users as $user)
+                                @foreach ($categories as $category)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                {{ $user->name }}
+                                                {{ $category->name }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                {{ $user->email }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex">
-                                                <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" onsubmit="return confirm('Are you sure?');">
+                                            <div class="flex space-x-2">
+                                                <a href="{{ route('categories.edit', $category->id) }}" class="text-purple-500 underline">Edit</a>
+                                                <form method="POST" action="{{ route('categories.destroy', $category->id) }}" onsubmit="return confirm('Are you sure?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="text-red-500 underline">Delete</button>
@@ -133,7 +123,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        {{ $users->links() }}
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>
