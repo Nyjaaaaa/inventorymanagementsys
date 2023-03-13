@@ -131,6 +131,32 @@
                 </a>
             </li>
 
+            <li>
+                <a
+                    href="{{ route('products.index') }}"
+                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                    :class="{'justify-center': !isSidebarOpen}"
+                >
+                    <span>
+                    <svg
+                        class="w-6 h-6 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                        />
+                    </svg>
+                    </span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Products</span>
+                </a>
+            </li>
+
             @role('admin')
               <li>
                   <a

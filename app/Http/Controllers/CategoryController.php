@@ -25,7 +25,7 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
 
-        $request->user()->categories()->create([
+        $request->user()->category()->create([
             'name' => $request->name,
         ]);
 
