@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>@yield('title', config('app.name'))</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net" />
@@ -87,7 +87,7 @@
                 <!-- Sidebar links -->
                 <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
                     <ul class="p-2 overflow-hidden">
-                        <li>
+                        <li class="{{ Request::is('dashboard') ? 'rounded-md bg-gray-100' : '' }}">
                             <a
                                 href="{{ route('dashboard') }}"
                                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
@@ -115,7 +115,7 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="{{ Request::is('categories*') ? 'rounded-md bg-gray-100' : '' }}">
                             <a
                                 href="{{ route('categories.index') }}"
                                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
@@ -143,7 +143,7 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="{{ Request::is('products*') ? 'rounded-md bg-gray-100' : '' }}">
                             <a
                                 href="{{ route('products.index') }}"
                                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
@@ -172,7 +172,7 @@
                         </li>
 
                         @role('admin')
-                        <li>
+                        <li class="{{ Request::is('admin/users*') ? 'rounded-md bg-gray-100' : '' }}">
                             <a
                                 href="{{ route('admin.users.index') }}"
                                 class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
