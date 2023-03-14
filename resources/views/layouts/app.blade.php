@@ -346,7 +346,7 @@
                 </header>
 
                 <!-- Main content -->
-                @yield('content')
+                {{ $slot }}
 
                 <!-- Main footer -->
                 <footer

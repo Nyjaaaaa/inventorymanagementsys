@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
     <!-- Main content -->
     <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
         <!-- Main content header -->
@@ -164,4 +162,4 @@
             </button>
         </form>
     </main>
-@endsection
+</x-app-layout>
