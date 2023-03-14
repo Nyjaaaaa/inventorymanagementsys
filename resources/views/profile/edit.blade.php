@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
     @if (Session::has('message'))
         <div
             id="toast-success"
@@ -78,4 +76,4 @@
             </div>
         </div>
     </main>
-@endsection
+</x-app-layout>
